@@ -1,12 +1,12 @@
 gem 'hamlit-rails'
-gem 'simple_form'
+gem 'erb2haml'
 gem 'devise'
 
 gem_group :development, :test do
-  gem 'html2haml'
   gem 'rspec-rails'
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
+  gem 'pry-rails'
 end
 
 application <<-CONFIG
@@ -28,7 +28,10 @@ application <<-CONFIG
   config.time_zone = 'Tokyo'
 CONFIG
 
+run 'bundle install'
 rails_command 'generate rspec:install'
-rails_command 'generate simple_form:install'
-rails_command 'devise:views'
+rails_command 'generate devise:install'
 rails_command 'hamlit:erb2haml'
+
+rails_command 'db:reset'
+rails_command 'db:migrate'
